@@ -4,7 +4,9 @@
   "private": true,
   "files": [
     "dist",
-    "src/global.css"
+    "src",
+    ".storybook",
+    "public"
   ],
   "type": "module",
   "sideEffects": false,
