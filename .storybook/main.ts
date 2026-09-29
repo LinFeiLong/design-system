@@ -1,7 +1,7 @@
 import type { StorybookConfig } from '@storybook/react-vite';
+import tailwindcss from '@tailwindcss/vite';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import tailwindcss from '@tailwindcss/vite';
 import { mergeConfig } from 'vite';
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -23,21 +23,14 @@ const config: StorybookConfig = {
     '@storybook/addon-docs',
     '@storybook/addon-mcp',
   ],
-  framework: {
-    name: '@storybook/react-vite',
-    options: {},
-  },
+  framework: { name: '@storybook/react-vite', options: {} },
   async viteFinal(config) {
     // Do not add @vitejs/plugin-react again — Storybook's react-vite framework
     // already injects it; a second copy throws RefreshRuntime redeclaration.
     return mergeConfig(config, {
       base,
       plugins: [tailwindcss()],
-      resolve: {
-        alias: {
-          '@': path.resolve(dirname, '../src'),
-        },
-      },
+      resolve: { alias: { '@': path.resolve(dirname, '../src') } },
     });
   },
 };
